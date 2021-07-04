@@ -16,7 +16,7 @@ public:
 	std::vector<GameCharacter> enemies;
 
 public:
-	Room(int=0, bool=false, std::vector<Item> = std::vector<Item>(),std::vector<GameCharacter> = std::vector<GameCharacter>());
+	Room(int position = 0, bool isExit = false, std::vector<Item> items = std::vector<Item>(),std::vector<GameCharacter> enemies = std::vector<GameCharacter>());
 	void clearLoot();
 	void clearEnemies();
 

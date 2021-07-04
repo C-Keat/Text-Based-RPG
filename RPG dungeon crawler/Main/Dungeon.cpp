@@ -166,7 +166,7 @@ void Dungeon::handleEmptyRoom(Room* room) {
 	
 	std::string input;
 	
-	std::cout << "You enter the room, but it is empty";
+	std::cout << "You enter the room, but it is empty ";
 	//std::string actions[] = { "a. Move to another room" };
 	std::vector<std::string> actions{ "a. Move to another room" };
 
@@ -196,7 +196,7 @@ void Dungeon::handleMovementActions(Room* room) {
 		if (room->pos == 0) {
 			//std::string actions[] = { "a. Move right", "b. Move down" };
 			actions.push_back("a. Move right");
-			actions.push_back("b. Move right");
+			actions.push_back("b. Move left");
 			printActions(actions.size(), actions);
 			
 			std::cin >> input;
@@ -282,6 +282,28 @@ void Dungeon::handleMovementActions(Room* room) {
 	}
 }
 
+int Dungeon::performEndGameLogic() {
+	std::vector<std::string> actions{ "a. Yes","b. No" };
+	
+	while (true)
+	{
+		printActions(actions.size(), actions);
+		std::string input;
+		std::cin >> input;
+		if (input == "a")
+		{
+			return 1;
+		}
+		else if (input == "b") {
+			return 0;
+		}
+		else {
+			std::cout << "Please selected a valid option\n";
+		}
+
+	}
+}
+
 int Dungeon::runDungeon() {
 
 	std::cout << "Welcome to the dungeon! Inside you will find true tressure" << std::endl;
@@ -292,13 +314,23 @@ int Dungeon::runDungeon() {
 	{
 		//enter the room
 		enterRoom(player.currentRoom);
-		
-		//present the actions
-		//player takes actions
-
-		//check to see the player is dead - break out of the while loop return 0 = fail
-		
+		//check if dead taking place
+		player.printStats();
+		if (player.checkIsDead() == true) {
+			//lose the game
+			std::cout << "Game over! Your Dead Try again?\n";
+			return performEndGameLogic();
+		}
+		else{
+			if (player.currentRoom->isExit) {
+				if (player.currentRoom->enemies.size() == 0) {
+					std::cout << "YOU WIN! Play again?";
+					return performEndGameLogic();
+				}
+			}
+		}
 		//movement options
+		handleMovementActions(player.currentRoom);
 
 	}
 

@@ -23,7 +23,7 @@ void Player::increaseStats(int h, int a, int d) {
 
 void Player::printStats() {
 
-	std::cout << "Current Health: " << currentHealth << "\nAttack: " << attack << "\nDefence: " << defence;
+	std::cout << "Current Health: " << currentHealth << "\nAttack: " << attack << "\nDefence: " << defence << std::endl;
 
 }
 

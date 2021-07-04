@@ -9,7 +9,7 @@ class GameCharacter
 public:
 	std::string name;
 	int maxHealth, currentHealth, attack, defence;
-	GameCharacter(std::string, int, int, int);
+	GameCharacter(std::string name, int health, int attack, int defence);
 	int takeDamage(int);
 	bool checkIsDead();
 
