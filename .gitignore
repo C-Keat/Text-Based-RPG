@@ -1,0 +1,13 @@
+
+RPG dungeon crawler/.vs/RPG dungeon crawler/v16/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.exe
+*.ilk
+*.pdb
+*.obj
+*.tlog
+*.idb
