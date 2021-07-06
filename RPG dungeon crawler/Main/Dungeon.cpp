@@ -18,6 +18,7 @@ void Dungeon::enterRoom(Room* room) {
 		//handle room with chest
 		handleRoomWithChest(room);
 	}
+	//else if (room->items.size() != 0 && room->items.size() != 0) handle room with chest and enemys
 	else {
 		handleEmptyRoom(room);
 	}
@@ -210,6 +211,7 @@ void Dungeon::handleMovementActions(Room* room) {
 				return;
 			}
 			else if (input == "b") {
+				//auto it = find(&rooms.begin(), &rooms.end(), int index)
 				player.changeRoom(&rooms[2]);
 				actions.clear();
 				return;
@@ -265,7 +267,6 @@ void Dungeon::handleMovementActions(Room* room) {
 		}
 		else
 		{
-			//std::string actions[] = { "a. Move left"};
 			actions.push_back("a. Move left");
 			printActions(actions.size(), actions);
 

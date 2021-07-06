@@ -13,8 +13,10 @@ class Dungeon
 //attributes
 public:
 	Player player;
-	Room rooms[4]; // this can change in order to a larger dungeon
+	//Room rooms[4]; // this can change in order to a larger dungeon
 	
+	std::vector<Room> rooms;
+
 //functions
 public:
 	Dungeon(Player);

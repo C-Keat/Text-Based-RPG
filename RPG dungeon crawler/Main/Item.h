@@ -9,8 +9,8 @@ class Item
 public:
 	std::string name;
 	int health, attack, defence;
-	Item(std::string, int, int, int);
-
+	Item(std::string, int health, int attack, int defence);
+	void ItemDefiner();
 
 };
 #endif ITEM_H
