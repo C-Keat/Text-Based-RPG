@@ -13,7 +13,7 @@ public:
 	std::vector<Item> inventory;
 	
 public:
-	Player(std::string="", int=100, int=20, int=0);
+	Player(std::string="", int=0, int=0, int=0);
 	void addItem(Item);
 	void increaseStats(int, int, int);
 	void lootRoom(Room *);

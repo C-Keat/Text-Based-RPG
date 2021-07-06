@@ -22,7 +22,7 @@ int GameCharacter::takeDamage(int amount) {
 
 bool GameCharacter::checkIsDead() {
 
-	std::cout << "current health = " << currentHealth << std::endl;
+	//std::cout << "current health = " << currentHealth << std::endl;
 
 	return currentHealth <= 0;
 

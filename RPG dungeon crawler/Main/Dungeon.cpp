@@ -4,6 +4,8 @@
 
 Dungeon::Dungeon(Player p)  {
 
+	player = p;
+
 }
 
 void Dungeon::enterRoom(Room* room) {
@@ -38,8 +40,8 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 	
 	std::string input;
 	std::vector<std::string> actions { "a. Attack", "b. Retreat" };
-	int playerDamage = enemy->takeDamage(player.attack);
-	int enemyDamage = player.takeDamage(enemy->attack);
+	int playerDamage;
+	int enemyDamage;
 
 	while (true)
 	{
@@ -48,7 +50,9 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 		//handle player actions
 		if (input == "a") {
 			//attack
+			playerDamage = enemy->takeDamage(player.attack);
 			std::cout << "Your attack does " << playerDamage << " damage!" << std::endl;
+			std::cout << "The enemy has " << enemy->currentHealth << " health remaining" << std::endl;
 			//check to see if the enemy is dead			
 		}
 		else if (input == "b")
@@ -79,6 +83,7 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 		std::cout << "The enemy is attacking you!\n";
 		
 		//the enemy hits
+		enemyDamage = player.takeDamage(player.attack);
 		std::cout << "The enemys attack does " << enemyDamage << " damage!" << std::endl;
 		std::cout << "You now have " << player.currentHealth << " health left\n";
 		if (player.checkIsDead())
@@ -158,7 +163,6 @@ void Dungeon::handleRoomWithChest(Room* room) {
 		else {
 			std::cout << "Please selected a valid option" << std::endl;
 		}
-
 	}
 }
 
@@ -194,7 +198,6 @@ void Dungeon::handleMovementActions(Room* room) {
 	while (true)
 	{
 		if (room->pos == 0) {
-			//std::string actions[] = { "a. Move right", "b. Move down" };
 			actions.push_back("a. Move right");
 			actions.push_back("b. Move left");
 			printActions(actions.size(), actions);
@@ -238,7 +241,6 @@ void Dungeon::handleMovementActions(Room* room) {
 		}
 		else if (room->pos == 2)
 		{
-			//std::string actions[] = { "a. Move left"};
 			actions.push_back("a. Move up");
 			actions.push_back("b. Move right");
 
@@ -315,7 +317,7 @@ int Dungeon::runDungeon() {
 		//enter the room
 		enterRoom(player.currentRoom);
 		//check if dead taking place
-		player.printStats();
+		//player.printStats();
 		if (player.checkIsDead() == true) {
 			//lose the game
 			std::cout << "Game over! Your Dead Try again?\n";
