@@ -12,6 +12,7 @@
 
 int main()
 {
+    (srand(time(NULL)));
     std::cout << "Welcome to our dungeon crawler! What is you name?" << std::endl;
     std::string playerName;
     std::cin >> playerName;
@@ -43,21 +44,84 @@ int main()
     std::vector<GameCharacter> bossRoom{ boss };
     std::vector<GameCharacter> enemyInsertRoom;
 
+    Dungeon mainDungeon = Dungeon(player);
 
-
-    RoomTree<Room>* dungeonOneTree = new RoomTree<Room>();
+    //enemy number variables:
+    int numberOfOgars = 0, numberOfGoblins = 0;
 
     int roomNumber = (rand() % 10) + 1;
 
+    int itemInsertNumber, enemyInsertNumber;
+
+    cout << "Number of rooms generated: " << roomNumber << endl;
+
+    for (int i = 0; i < roomNumber; i++)
+    {
+
+        itemInsertNumber = (rand() % 3) + 1;
+
+        //creating the items that will be inserted into the room
+        switch (itemInsertNumber)
+        {
+        case 1:
+            //makes the insert room a weapon room
+            itemInsertRoom = weaponRoom;
+            break;
+            
+        case 2:
+            //makes the insert room a armour room
+            itemInsertRoom = armourRoom;
+            break;
+
+        case 3:
+            //no items in the room
+            itemInsertRoom = std::vector<Item>();
+            break;
+        }
+
+        //creating the enemys that will be inserted into the room
+
+        enemyInsertNumber = (rand() % 3) + 1;
+
+        cout << "\n" << "Number of enemies: " << enemyInsertNumber << endl;
+
+        switch (enemyInsertNumber)
+        {
+        case 1:
+            //make the enemy insert room a gobline room
+            numberOfGoblins = (rand() % 4) + 1;
+            for (int i = 0; i < numberOfGoblins; i++)
+            {
+                goblinRoom.push_back(goblin);
+            }
+            enemyInsertRoom = goblinRoom;
+
+            goblinRoom.clear();
+            break;
+
+        case 2:
+            // set enemyInsertRoom to a Ogar room
+            numberOfOgars = (rand() % 2) + 1;
+            for (int i = 0; i < numberOfOgars; i++)
+            {
+                ogarRoom.push_back(ogar);
+            }
+            enemyInsertRoom = ogarRoom;
+
+            ogarRoom.clear();
+            break;
+
+        case 3:
+            //set enemy insert room to empty
+            enemyInsertRoom = std::vector<GameCharacter>();
+            break;
+        }
+
+        //random room is pushed back into the dungeons rooms
+        mainDungeon.rooms.push_back(Room(i, false, itemInsertRoom, enemyInsertRoom));
 
 
-
-
-
-
-
-
-
+    }
 
     while (true)
     {

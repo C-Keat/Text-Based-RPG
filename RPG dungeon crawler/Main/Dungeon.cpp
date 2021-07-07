@@ -18,7 +18,11 @@ void Dungeon::enterRoom(Room* room) {
 		//handle room with chest
 		handleRoomWithChest(room);
 	}
-	//else if (room->items.size() != 0 && room->items.size() != 0) handle room with chest and enemys
+	else if (room->items.size() != 0 && room->enemies.size() != 0) {
+		//handle room with enemy and chest
+		handleRoomWithEnemyAndLoot(room);
+
+	}
 	else {
 		handleEmptyRoom(room);
 	}
@@ -37,6 +41,42 @@ void Dungeon::printActions(int numActions, std::vector<std::string> actions) {
 
 }
 
+void Dungeon::handleRoomWithEnemyAndLoot(Room* room) {
+
+	//logic for room handeling
+	std::string input;
+	//fight first before being able to get to the chest 
+	
+	handleRoomWithEnemy(room);
+
+	//after fight over, handle the chest
+	std::cout << "After defeating the enemys its clear they were guarding a chest!";
+	//std::string actions[] = { "a. Loot the chest", "b. Move to another room" };
+	std::vector<std::string> actions{ "a. Loot the chest", "b. Move to another room" };
+
+	while (true && input != "b")
+	{
+		printActions(actions.size(), actions);
+		std::cin >> input;
+
+		if (input == "a") {
+			//loot chest
+			handleLootActions(room);
+			return;
+		}
+		else if (input == "b")
+		{
+			return;
+		}
+		else {
+			std::cout << "Please selected a valid option" << std::endl;
+		}
+	}
+
+}
+
+
+
 void Dungeon::handleFightActions(GameCharacter * enemy) {
 	
 	std::string input;
@@ -54,7 +94,7 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 			playerDamage = enemy->takeDamage(player.attack);
 			std::cout << "Your attack does " << playerDamage << " damage!" << std::endl;
 			std::cout << "The enemy has " << enemy->currentHealth << " health remaining" << std::endl;
-			//check to see if the enemy is dead			
+						
 		}
 		else if (input == "b")
 		{
@@ -75,7 +115,7 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 			std::cout << "Your new stats are: " << std::endl;
 			player.printStats();
 
-			//clear the room
+			//need to clear the enemy that is actually dead not the whole room
 			player.currentRoom->clearEnemies();
 			return;
 		}
@@ -97,20 +137,38 @@ void Dungeon::handleFightActions(GameCharacter * enemy) {
 void Dungeon::handleRoomWithEnemy(Room* room) {
 	
 	std::string input;
-	GameCharacter enemy = room->enemies.front();
+	//got to capture the number of enemys in the room, not just the one at the front so that the fight continues until all are dead
+	//GameCharacter enemy = room->enemies.front();
 
-	std::cout << "You enter the room and see a " << enemy.name << "!";
-	std::vector<std::string> actions{ "a. fight the " + enemy.name, "b. Move back to previous room" };
+	//need to print the number of enemies in room
+
+	std::vector<GameCharacter> enemy = room->enemies;
+
+	std::cout << "You enter the room and see " << enemy.size() + 1 << " " << enemy.front().name << "!" << std::endl;
+	std::cout << "You will have to fight them one at a time, the room is too small to do anything else or you can run" << std::endl;
+
+	std::vector<std::string> actions;
 
 	while (true)
 	{
+		enemy = room->enemies;
+
+		actions.push_back("a. fight the " + enemy.front().name);
+		actions.push_back("b. Move back to previous room!");
+
 		printActions(actions.size(), actions); 
 		std::cin >> input;
 
+
 		if (input == "a") {
 			//fight
-			handleFightActions(&enemy);
-			return;
+			if (enemy.size() != 0) {
+				handleFightActions(&enemy.front());
+			}
+			else {
+				std::cout << "There are no more enemies to fight" << std::endl;
+				return;
+			}	
 		}
 		else if (input == "b")
 		{
@@ -211,7 +269,7 @@ void Dungeon::handleMovementActions(Room* room) {
 				return;
 			}
 			else if (input == "b") {
-				//auto it = find(&rooms.begin(), &rooms.end(), int index)
+				//change the current player room
 				player.changeRoom(&rooms[2]);
 				actions.clear();
 				return;
@@ -224,7 +282,7 @@ void Dungeon::handleMovementActions(Room* room) {
 		}
 		else if (room->pos == 1)
 		{
-			//std::string actions[] = { "a. Move left"};
+			//push the different actions to actions so they can be printed for player
 			actions.push_back("a. Move left");
 			
 			printActions(actions.size(), actions);
