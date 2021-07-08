@@ -230,7 +230,6 @@ void Dungeon::handleEmptyRoom(Room* room) {
 	std::string input;
 	
 	std::cout << "You enter the room, but it is empty ";
-	//std::string actions[] = { "a. Move to another room" };
 	std::vector<std::string> actions{ "a. Move to another room" };
 
 	while (true)
@@ -274,6 +273,7 @@ void Dungeon::handleMovementActions(Room* room) {
 				actions.clear();
 				return;
 			}
+			
 			else
 			{
 				std::cout << "Please select the valid choice\n";

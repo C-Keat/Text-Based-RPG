@@ -1,0 +1,139 @@
+void Dungeon::handleMovementActions(Room* room) {
+	
+	std::vector<std::string> actions;
+	std::string input;
+
+	while (true)
+	{
+	//can we check to see how many rooms there  are in the dungeon before, so we can have different movement based on overall size. Or do we just have doors that lead nowhere?
+	//the starting room always there
+		if (room->pos == 0) {
+			actions.push_back("a. Move right");
+			actions.push_back("b. Move left");
+			actions.push_back("c. Move up");
+			printActions(actions.size(), actions);
+			
+			std::cin >> input;
+
+			if (input == "a") {
+				player.changeRoom(&rooms[1]);
+				actions.clear();
+				return;
+			}
+			else if (input == "b") {
+				//change the current player room
+				player.changeRoom(&rooms[2]);
+				actions.clear();
+				return;
+			}
+			else if(input == "c") {
+				//change the current player room to room 3
+				if(rooms.size() > 3){
+					player.changeRoom(&rooms[3]);
+				}
+				action.clear();
+				return;			
+			}
+			else
+			{
+				std::cout << "Please select the valid choice\n";
+			}
+
+		}
+		else if (room->pos == 1)
+		{
+			//push the different actions to actions so they can be printed for player
+			actions.push_back("a. Move left");
+			//if check based on size of rooms vector? only add this to actions if size is greater or same as 5
+			actions.push_back("b. Move Up");
+			
+			printActions(actions.size(), actions);
+			
+			std::cin >> input;
+
+			if (input == "a") {
+				player.changeRoom(&rooms[0]);
+				actions.clear();
+				return;
+			}
+			else if(input == "b" && rooms.size() >= 5){
+				
+				player.changeRoom(&rooms[5]);
+				actions.clear();
+				return;
+			
+			}
+			else
+			{
+				std::cout << "Please select the valid choice\n";
+			}
+		}
+		else if (room->pos == 2)
+		{
+			actions.push_back("a. Move up");
+			//if check to see size of rooms is >= 4
+			actions.push_back("b. Move right");
+
+			printActions(actions.size(), actions);
+			
+			std::cin >> input;
+
+			if (input == "a") {
+				player.changeRoom(&rooms[0]);
+				actions.clear();
+				return;
+			}
+			else if (input == "b" && rooms.size() >= 4) {
+				player.changeRoom(&rooms[4]);
+				actions.clear();
+				return;
+			}
+			else
+			{
+				std::cout << "Please select the valid choice\n";
+			}
+		}
+		else if (room->pos == 3){
+			
+			actions.push_back("a. Move right");
+			actions.push_back("b. Move left");
+			actions.push_back("c. Move up");
+			actions.push_back("d. Move down");
+			
+			printActions(actions.size(), actions);
+			
+			std::cin >> input;
+			
+			if (input == "a"){
+				player.changeRoom(&rooms[5]);
+				actions.clear();
+				return;	
+			}
+			else if (input == "b"){
+				player.changeRoom(&rooms[4]);
+				
+			
+			}
+			
+		
+		
+		}
+		else
+		{
+			actions.push_back("a. Move left");
+			printActions(actions.size(), actions);
+
+			std::cin >> input;
+
+			if (input == "a") {
+				player.changeRoom(&rooms[2]);
+				actions.clear();
+				return;
+			}else
+			{
+				std::cout << "Please select the valid choice\n";
+			}
+
+		}
+	}
+}

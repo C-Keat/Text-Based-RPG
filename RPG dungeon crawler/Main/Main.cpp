@@ -51,6 +51,12 @@ int main()
 
     int roomNumber = (rand() % 10) + 1;
 
+    //check to make sure that the dungeon is not lower than 3 rooms large
+    while (roomNumber < 3)
+    {
+        roomNumber = (rand() % 10) + 1;
+    }
+
     int itemInsertNumber, enemyInsertNumber;
 
     cout << "Number of rooms generated: " << roomNumber << endl;
@@ -120,8 +126,10 @@ int main()
         //random room is pushed back into the dungeons rooms
         mainDungeon.rooms.push_back(Room(i, false, itemInsertRoom, enemyInsertRoom));
 
-
     }
+    
+    mainDungeon.rooms.push_back(Room(roomNumber + 1, true, vector<Item>(), bossRoom));
+    
 
     while (true)
     {
