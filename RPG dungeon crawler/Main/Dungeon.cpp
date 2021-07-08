@@ -255,66 +255,147 @@ void Dungeon::handleMovementActions(Room* room) {
 
 	while (true)
 	{
-		if (room->pos == 0) {
+		//the middle row
+		if (room->pos == 0 || room->pos == 3 || room->pos == 6) {
+
 			actions.push_back("a. Move right");
 			actions.push_back("b. Move left");
+			actions.push_back("c. Move up");
+
+			if (room->pos == 3 || room->pos == 6) {
+				actions.push_back("d. Move back");
+			}
+
 			printActions(actions.size(), actions);
-			
+
 			std::cin >> input;
 
 			if (input == "a") {
-				player.changeRoom(&rooms[1]);
+				//middle row - move right
+
+				if (rooms.size() >= 3 && room->pos == 0) {
+					player.changeRoom(&rooms[room->pos + 1]);
+				}
+				else if (rooms.size() >= 6 && room->pos == 3) {
+					player.changeRoom(&rooms[room->pos + 1]);
+				}
+				else if (rooms.size() >= 9 && room->pos == 6) {
+					player.changeRoom(&rooms[room->pos + 1]);
+				}
+				else {
+					std::cout << "That door goes no where, try another" << std::endl;
+					player.changeRoom(&rooms[room->pos]);
+				}
+
 				actions.clear();
 				return;
 			}
 			else if (input == "b") {
-				//change the current player room
-				player.changeRoom(&rooms[2]);
+				//middle row - move left
+
+				if (rooms.size() >= 3 && room->pos == 0) {
+					player.changeRoom(&rooms[room->pos + 2]);
+				}
+				else if (rooms.size() >= 6 && room->pos == 3) {
+					player.changeRoom(&rooms[room->pos + 2]);
+				}
+				else if (rooms.size() >= 9 && room->pos == 6) {
+					player.changeRoom(&rooms[room->pos + 2]);
+				}
+				else {
+					std::cout << "That door goes no where, try another" << std::endl;
+					player.changeRoom(&rooms[room->pos]);
+				}
+
 				actions.clear();
 				return;
 			}
-			
+			else if (input == "c") {
+				//middle row - move up
+
+				if (rooms.size() >= 3 && room->pos == 0) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else if (rooms.size() >= 6 && room->pos == 3) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else {
+					std::cout << "That door goes no where, try another" << std::endl;
+					player.changeRoom(&rooms[room->pos]);
+				}
+
+				actions.clear();
+				return;
+			}
+			else if (input == "d" && room->pos == 3 || input == "d" && room->pos == 6) {
+				//move down
+				player.changeRoom(&rooms[room->pos - 3]);
+				actions.clear();
+				return;
+			}
 			else
 			{
 				std::cout << "Please select the valid choice\n";
 			}
 
 		}
-		else if (room->pos == 1)
-		{
-			//push the different actions to actions so they can be printed for player
-			actions.push_back("a. Move left");
-			
+
+		//the left row
+		if (room->pos == 2 || room->pos == 5 || room->pos == 8) {
+
+			actions.push_back("a. Move right");
+			actions.push_back("b. Move up");
+			if (room->pos == 5 || room->pos == 8) {
+				actions.push_back("c. Move down");
+			}
+
 			printActions(actions.size(), actions);
-			
+
 			std::cin >> input;
 
 			if (input == "a") {
-				player.changeRoom(&rooms[0]);
-				actions.clear();
-				return;
-			}
-			else
-			{
-				std::cout << "Please select the valid choice\n";
-			}
-		}
-		else if (room->pos == 2)
-		{
-			actions.push_back("a. Move up");
-			actions.push_back("b. Move right");
+				//left row - move right
 
-			printActions(actions.size(), actions);
-			
-			std::cin >> input;
+				if (rooms.size() >= 3 && room->pos == 2) {
+					player.changeRoom(&rooms[room->pos - 2]);
+				}
+				else if (rooms.size() >= 5 && room->pos == 5) {
+					player.changeRoom(&rooms[room->pos - 2]);
+				}
+				else if (rooms.size() >= 8 && room->pos == 8) {
+					player.changeRoom(&rooms[room->pos - 2]);
+				}
 
-			if (input == "a") {
-				player.changeRoom(&rooms[0]);
 				actions.clear();
 				return;
 			}
 			else if (input == "b") {
-				player.changeRoom(&rooms[3]);
+				//left row - move up
+
+				if (rooms.size() >= 5 && room->pos == 2) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else if (rooms.size() >= 8 && room->pos == 5) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else {
+					std::cout << "That door goes no where, try another" << std::endl;
+					player.changeRoom(&rooms[room->pos]);
+				}
+
+				actions.clear();
+				return;
+			}
+			else if (input == "c") {
+				//left row - move down
+
+				if (rooms.size() >= 5 && room->pos == 5) {
+					player.changeRoom(&rooms[room->pos - 3]);
+				}
+				else if (rooms.size() >= 8 && room->pos == 8) {
+					player.changeRoom(&rooms[room->pos - 3]);
+				}
+
 				actions.clear();
 				return;
 			}
@@ -322,19 +403,70 @@ void Dungeon::handleMovementActions(Room* room) {
 			{
 				std::cout << "Please select the valid choice\n";
 			}
+
 		}
-		else
-		{
+
+		//the right row
+
+		if (room->pos == 1 || room->pos == 4 || room->pos == 7) {
+
 			actions.push_back("a. Move left");
+			actions.push_back("b. Move up");
+			if (room->pos == 4 || room->pos == 7) {
+				actions.push_back("c. Move down");
+			}
+
 			printActions(actions.size(), actions);
 
 			std::cin >> input;
 
 			if (input == "a") {
-				player.changeRoom(&rooms[2]);
+				//right row - move left
+
+				if (rooms.size() >= 3 && room->pos == 1) {
+					player.changeRoom(&rooms[room->pos - 1]);
+				}
+				else if (rooms.size() >= 4 && room->pos == 4) {
+					player.changeRoom(&rooms[room->pos - 1]);
+				}
+				else if (rooms.size() >= 7 && room->pos == 7) {
+					player.changeRoom(&rooms[room->pos - 1]);
+				}
+
 				actions.clear();
 				return;
-			}else
+			}
+			else if (input == "b") {
+				//right row - move up
+
+				if (rooms.size() >= 4 && room->pos == 1) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else if (rooms.size() >= 7 && room->pos == 4) {
+					player.changeRoom(&rooms[room->pos + 3]);
+				}
+				else {
+					std::cout << "That door goes no where, try another" << std::endl;
+					player.changeRoom(&rooms[room->pos]);
+				}
+
+				actions.clear();
+				return;
+			}
+			else if (input == "c") {
+				//left row - move down
+
+				if (rooms.size() >= 4 && room->pos == 4) {
+					player.changeRoom(&rooms[room->pos - 3]);
+				}
+				else if (rooms.size() >= 7 && room->pos == 7) {
+					player.changeRoom(&rooms[room->pos - 3]);
+				}
+
+				actions.clear();
+				return;
+			}
+			else
 			{
 				std::cout << "Please select the valid choice\n";
 			}

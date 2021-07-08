@@ -10,7 +10,7 @@ public:
 	std::string name;
 	int health, attack, defence;
 	Item(std::string, int health, int attack, int defence);
-	void ItemDefiner();
+	//void ItemDefiner();
 
 };
 #endif ITEM_H

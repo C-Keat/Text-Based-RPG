@@ -54,7 +54,7 @@ int main()
     //check to make sure that the dungeon is not lower than 3 rooms large
     while (roomNumber < 3)
     {
-        roomNumber = (rand() % 10) + 1;
+        roomNumber = (rand() % 10);
     }
 
     int itemInsertNumber, enemyInsertNumber;
@@ -89,7 +89,7 @@ int main()
 
         enemyInsertNumber = (rand() % 3) + 1;
 
-        cout << "\n" << "Number of enemies: " << enemyInsertNumber << endl;
+        //cout << "\n" << "Number of enemies: " << enemyInsertNumber << endl;
 
         switch (enemyInsertNumber)
         {
