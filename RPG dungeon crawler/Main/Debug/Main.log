@@ -1,10 +1,3 @@
-﻿  Dungeon.cpp
-  Item.cpp
-  Main.cpp
+﻿  Main.cpp
 C:\Users\ZNBC3\Documents\GitHub\Text-Based-RPG\RPG dungeon crawler\Main\Main.cpp(15,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Player.cpp
-C:\Users\ZNBC3\Documents\GitHub\Text-Based-RPG\RPG dungeon crawler\Main\Player.cpp(33,20): warning C4018: '<': signed/unsigned mismatch
-  Room.cpp
-  RoomTree.cpp
-  Generating Code...
   Main.vcxproj -> C:\Users\ZNBC3\Documents\GitHub\Text-Based-RPG\RPG dungeon crawler\Debug\RPG game.exe
