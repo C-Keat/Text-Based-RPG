@@ -13,8 +13,8 @@ class Dungeon
 //attributes
 public:
 	Player player;
-	Room rooms[4]; // this can change in order to a larger dungeon
-	
+	std::vector<Room> rooms;
+
 //functions
 public:
 	Dungeon(Player);
@@ -23,6 +23,7 @@ public:
 	void handleEmptyRoom(Room*);
 	void handleRoomWithChest(Room*);
 	void handleRoomWithEnemy(Room*);
+	void handleRoomWithEnemyAndLoot(Room*);
 	void handleLootActions(Room*);
 	void handleFightActions(GameCharacter*);
 	void handleMovementActions(Room*);

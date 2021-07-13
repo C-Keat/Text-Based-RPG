@@ -39,6 +39,8 @@ void Player::lootRoom(Room* room) {
 void Player::changeRoom(Room* newRoom) {
 
 	previousRoom = currentRoom;
+	std::cout << "You enter room" << newRoom->pos << std::endl;
+
 	currentRoom = newRoom;
 
 }

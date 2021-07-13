@@ -1,0 +1,130 @@
+Plan for main randoming dungeon creation
+
+#include time for random time
+
+tree being used to place all the rooms of the dungeon in.
+vector of the enemys
+vector of the weapons being put in a chest
+
+
+void defineEnemysAndItems(){
+
+	
+//definding games items
+	Item sword = Item("Sword", 0, 20, 0);
+    Item armour = Item("Armour", 0, 0, 15);
+    Item shield = Item("Shield", 0, 0, 10);
+
+//definding games enemys
+	GameCharacter goblin = GameCharacter("Goblin",50,15,5);
+	GameCharacter ogar = GameCharacter("Ogar",100,20,10);
+
+}
+
+main()
+	{
+	
+		defineEnemysAndItems();
+	
+		std::vector<Item> weaponRoom; //define here whats in this room
+		std::vector<Item> armourRoom; //define here whats in this room
+		std::vector<Item> itemInsertRoom;
+
+		std::vector<GameCharacter> goblinRoom;
+		std::vector<GameCharacter> ogarRoom;
+		std::vector<GameCharacter> enemyInsertRoom;
+
+		std::vector<GameCharacter> bossRoom insert boss now as will always be the same;
+
+		RoomTree<Room>* dungeonOneTree = new RoomTree<Room>();
+		
+		int roomNumber = Random number between 3 and 10;//represents the length of the first dungeon
+
+		int itemInsertNumber;
+
+		//creating the item to be inserted into the room creation
+		for(roomNumber){
+
+			itemInsertNumber = random number between 1 and 3;
+			
+			swtich(itemInsertNumber) {
+			case 1:
+			
+				// makes the room a weaponRoom the inserted room
+				
+				itemInsertRoom = weaponRoom; 
+				
+				break;
+				
+			case 2:
+				// make the room a armourRoom
+				
+				itemInsertRoom = armourRoom;
+				
+				break;
+				
+			case 3:
+			
+				// no items in the room 
+				itemInsertRoom = std::vector<Item>();
+				break;
+			}
+			
+			//perform a switch statment about the enemys?
+			
+			enemyInsertNumber = random number between 1 and 3;
+			
+			switch(enemyInsertNumber){
+				
+			case 1: 
+				//set enemyInsertRoom to goblinRoom
+			
+				int numberOfGoblins = random number between 1 and 5;
+				
+				for(numberOfGoblins){
+				
+					goblinRoom.push_back(goblin);
+					
+				}
+				
+				enemyInsertRoom = goblinRoom;
+				
+				goblinRoom.clear();
+				break;
+				
+			case 2: 
+				
+				//set enemyInsertRoom to ogarRoom
+				
+				int numberOfOgars = random number between 1 to 2;
+				
+				for(numberOfOgars){
+				
+					ogarRoom.push_back(ogar);
+				
+				}
+				
+				enemyInsertRoom = ogarRoom;
+				
+				ogarRoom.clear();
+				break;
+				
+				
+			case 3:
+				
+				//set enemyInsertRoom to empty
+			
+				enemyInsertRoom = std::vector<GameCharacter>();
+				break;
+			
+			}
+			
+			
+			dungeonOneTree->TreeInsert(forLoopIndex, false, itemInsertRoom, enemyInsertRoom)
+			
+		}
+
+		
+	}
+
+

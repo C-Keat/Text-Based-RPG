@@ -8,4 +8,10 @@ Item::Item(std::string n, int h, int a, int d) {
 	attack = a;
 	defence = d;
 
+    
+
+    
+
+
 }
+

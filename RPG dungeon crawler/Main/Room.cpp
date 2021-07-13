@@ -13,6 +13,7 @@ void Room::clearLoot() {
 
 void Room::clearEnemies() {
 
-	enemies.clear();
+	enemies.erase(enemies.begin());
+	//enemies.clear();
 
 }
